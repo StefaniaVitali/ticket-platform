@@ -2,6 +2,8 @@ package it.svitali.dashboard.model;
 
 import java.time.LocalDateTime;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -29,6 +31,7 @@ public class Ticket {
 	@Column(name="status", nullable=false)
 	private TicketStatus ticketStatus;
 	
+	@DateTimeFormat(pattern="dd/MM/yyyy HH:mm")
 	@Column(name="data_creazione", nullable=false)
 	private LocalDateTime data;
 	
