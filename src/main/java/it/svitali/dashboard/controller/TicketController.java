@@ -6,8 +6,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -45,6 +48,27 @@ public class TicketController {
     	model.addAttribute("ticket", ticketRepository.getReferenceById(ticketId));
     	
     	return "tickets/show";
+    }
+    
+    @GetMapping("/create")
+    public String create(Model model) {
+    	
+    	model.addAttribute("ticket", new Ticket());
+    	
+    	return "tickets/create";    
+    	}
+    
+    @PostMapping("/create")
+    public String store(@ModelAttribute("ticket") Ticket ticketForm, BindingResult bindingRisult, 
+    		Model model) {
+    	
+    	if(bindingRisult.hasErrors()) {
+			return "pizzeria/create";
+		}
+    	
+    	 ticketRepository.save(ticketForm);
+    	
+    	return"redirect:/dashboard";
     }
     
 	

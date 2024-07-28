@@ -32,10 +32,15 @@ public class Ticket {
 	private TicketStatus ticketStatus;
 	
 	@DateTimeFormat(pattern="dd/MM/yyyy HH:mm")
-	@Column(name="data_creazione", nullable=false)
+	@Column(name="data_creazione")
 	private LocalDateTime data;
 	
-	
+	//COSTRUTTORE
+	public Ticket(){
+		data = LocalDateTime.now();
+		ticketStatus = TicketStatus.NOT_STARTED;
+	};	
+
 	//GETTER E SETTER
 	public Integer getId() {
 		return id;
