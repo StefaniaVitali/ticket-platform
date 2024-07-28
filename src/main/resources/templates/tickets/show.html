@@ -17,7 +17,7 @@
 	<header>
 		<nav class="navbar navbar-expand-lg bg-dark navbar-dark mb-5">
 			<div class="container">
-				<a class="navbar-brand" href="#">Ticket Dash</a>
+				<a class="navbar-brand"	th:href="@{/dashboard}">Ticket Dash</a>
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
 					data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
 					aria-expanded="false" aria-label="Toggle navigation">
@@ -43,13 +43,23 @@
 	<section class="ticket-detail-section">
 
 		<div class="container">
-			<h1 class="text-center" th:text="|Dettaglio task ${ticket.titolo}|"></h1>
+			<div class="d-flex justify-content-center align-items-center">				
+			<h1 class="text-center me-3" th:text="|Dettaglio task ${ticket.titolo}|"></h1>
+						
+			<th:block th:switch="${ticket.ticketStatus}">
+			    <span th:case="${T(it.svitali.dashboard.model.TicketStatus).NOT_STARTED}"
+				class="rounded-pill bg-secondary text-light p-2" th:text="${ticket.ticketStatus}"></span>
+			    <span th:case="${T(it.svitali.dashboard.model.TicketStatus).STARTED}"
+				class="rounded-pill bg-primary text-light p-2" th:text="${ticket.ticketStatus}"></span>
+			    <span th:case="${T(it.svitali.dashboard.model.TicketStatus).COMPLETED}"
+				class="rounded-pill bg-success text-light p-2" th:text="${ticket.ticketStatus}"></span>
+			</th:block>
+			</div>
 			<div class="d-flex justify-content-center">
 				
 			<div class="my-5">
 				<p th:text="|Descrizione: ${ticket.descrizione}|"></p>
-				<p th:text="${ticket.ticketStatus}"></pclass="badge text-bg-success">
-				<p>Operatore</p>
+				<p>Operatore assegnato: </p>
 				<p th:text="|DATA CREAZIONE: ${#temporals.format(ticket.data, 'dd/MM/yyyy HH:mm')}|"></p>
 			</div>
 			</div>

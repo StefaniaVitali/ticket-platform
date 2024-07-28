@@ -71,7 +71,19 @@
 						<th th:text="${ticket.titolo}"></th>
 						<th th:text="${ticket.descrizione}"></th>
 						<th th:text="${#temporals.format(ticket.data, 'dd/MM/yyyy HH:mm')}"></th>
-						<th th:text="${ticket.ticketStatus}"></th>
+						<th>
+							<th:block th:switch="${ticket.ticketStatus}">
+								<span th:case="${T(it.svitali.dashboard.model.TicketStatus).NOT_STARTED}"
+									class="rounded-pill bg-secondary text-light py-1 px-2"
+									th:text="${ticket.ticketStatus}"></span>
+								<span th:case="${T(it.svitali.dashboard.model.TicketStatus).STARTED}"
+									class="rounded-pill bg-primary text-light py-1 px-2"
+									th:text="${ticket.ticketStatus}"></span>
+								<span th:case="${T(it.svitali.dashboard.model.TicketStatus).COMPLETED}"
+									class="rounded-pill bg-success text-light py-1 px-2"
+									th:text="${ticket.ticketStatus}"></span>
+							</th:block>
+						</th>
 					</tr>
 				</tbody>
 
