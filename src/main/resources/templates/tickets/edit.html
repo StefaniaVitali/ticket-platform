@@ -45,29 +45,48 @@
 			<div class="d-flex justify-content-center col-12">
 
 				<div class="form-create col-auto my-5 rounded">
-					<h1 class="text-center p-3">Crea un nuovo ticket</h1>
-					<form class="py-3 px-4" id="ticket-form" th:object="${ticket}" th:action="@{/dashboard/create}"
-						th:method="post">
+					<h1 class="text-center p-3" th:field="|Ticket: ${ticket.titolo}|"></h1>
+					
+					<form class="py-3 px-4" id="ticket-form" th:object="${ticket}"
+						th:action="@{/dashboard/edit/{id}(id=${ticket.id})}" th:method="post">
 						<div class="mb-3">
 							<label for="titolo" class="form-label">Titolo*</label>
-							<input class="form-control" type="text" id="titolo" th:field="*{titolo}" th:errorClass="is-invalid">
-						<div th:if="${#fields.hasErrors('titolo')}" class="invalid-feedback">
-							<ul>
-								<li th:each="err: ${#fields.errors('titolo')}" th:text="${err}"></li>
-							</ul>
-							
+							<input class="form-control" type="text" id="titolo" th:field="*{titolo}"
+								th:errorClass="is-invalid">
+							<div th:if="${#fields.hasErrors('titolo')}" class="invalid-feedback">
+								<ul>
+									<li th:each="err: ${#fields.errors('titolo')}" th:text="${err}"></li>
+								</ul>
+
+							</div>
+
+
+
 						</div>
-						</div>
+						<!--OPERATORE modificare lo status-->
+						<div class="mb-3">
+							<label for="status" class="form-label">Status</label>
+							<input class="form-control" type="text" id="status" th:field="*{ticketStatus}"
+								readonly>
+							</div>
+							<!--la data di creazione non deve cambiare-->
+							<div class="mb-3">
+								<label for="data-creazione" class="form-label">Data creazione</label>
+								<input class="form-control" type="text" id="data-creazione" th:field="*{data}"
+									readonly>
+								</div>							
+
+						
 						<div class="mb-3">
 							<label for="descrizione" class="form-label">Descrizione*</label>
 							<textarea class="form-control" id="descrizione" name="descrizione" th:field="*{descrizione}"
 								row="4" cols="50" th:errorClass="is-invalid"></textarea>
-								<div th:if="${#fields.hasErrors('descrizione')}" class="invalid-feedback">
-									<ul>
-										<li th:each="err: ${#fields.errors('descrizione')}" th:text="${err}"></li>
-									</ul>
-									
-								</div>
+							<div th:if="${#fields.hasErrors('descrizione')}" class="invalid-feedback">
+								<ul>
+									<li th:each="err: ${#fields.errors('descrizione')}" th:text="${err}"></li>
+								</ul>
+
+							</div>
 						</div>
 						<div class="mb-3">
 							<!--OPERATORE DA SELEZIONARE select da implementare -->
@@ -79,7 +98,7 @@
 						<!--fine select operatore -->
 						<!--NOTE? -->
 						<!--CATEGORIE?-->
-						<button type="submit" class="btn btn-primary">CREA</button>
+						<button type="submit" class="btn btn-primary">MODIFICA</button>
 					</form>
 				</div>
 			</div>

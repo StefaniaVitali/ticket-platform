@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import it.svitali.dashboard.model.Ticket;
 import it.svitali.dashboard.repository.TicketRepository;
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/dashboard")
@@ -59,16 +60,36 @@ public class TicketController {
     	}
     
     @PostMapping("/create")
-    public String store(@ModelAttribute("ticket") Ticket ticketForm, BindingResult bindingRisult, 
+    public String store(@Valid @ModelAttribute("ticket") Ticket ticketForm, BindingResult bindingRisult, 
     		Model model) {
     	
     	if(bindingRisult.hasErrors()) {
-			return "pizzeria/create";
+			return "tickets/create";
 		}
     	
     	 ticketRepository.save(ticketForm);
     	
     	return"redirect:/dashboard";
+    }
+    
+    @GetMapping("/edit/{id}")
+    public String edit(@PathVariable("id") Integer ticketId, Model model) {
+    	
+    	model.addAttribute("ticket", ticketRepository.findById(ticketId).get());
+    	return"tickets/edit";
+    }
+    
+    @PostMapping("/edit/{id}")
+    public String update(@Valid @ModelAttribute("ticket") Ticket ticketForm,BindingResult bindingRisult,
+    		Model model) {   
+    	
+    	if(bindingRisult.hasErrors()) {
+			return "tickets/edit";
+		}
+    	
+    	ticketRepository.save(ticketForm);
+    	
+    	return "redirect:/dashboard";
     }
     
 	

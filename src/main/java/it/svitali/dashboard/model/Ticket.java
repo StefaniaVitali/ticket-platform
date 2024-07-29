@@ -12,6 +12,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name="ticket")
@@ -21,17 +23,21 @@ public class Ticket {
 	@GeneratedValue(strategy = GenerationType.IDENTITY )
 	private Integer id;
 	
+	@NotBlank(message ="Il titolo non può essere vuoto")
 	@Column(name="titolo", nullable=false)
 	private String titolo;
 	
+	@NotBlank(message ="la descrizione non può essere vuota")
 	@Column(name="descrizione", nullable=false)
 	private String descrizione;
 	
+	@NotNull
 	@Enumerated(EnumType.STRING)
 	@Column(name="status", nullable=false)
 	private TicketStatus ticketStatus;
 	
-	@DateTimeFormat(pattern="dd/MM/yyyy HH:mm")
+	@NotNull
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	@Column(name="data_creazione")
 	private LocalDateTime data;
 	
