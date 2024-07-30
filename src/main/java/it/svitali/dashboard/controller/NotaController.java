@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import it.svitali.dashboard.model.Nota;
 import it.svitali.dashboard.repository.NotaRepository;
 import it.svitali.dashboard.repository.TicketRepository;
 
@@ -19,6 +20,13 @@ public class NotaController {
 	
 	@Autowired
 	private NotaRepository notaRepository;
+	
+
+//	@GetMapping("/create")
+//	public String create(Model model) {
+//		model.addAttribute("nota", new Nota());
+//		model.addAttribute("list",notaRepository.findById(null));
+//	}
 	
 
 

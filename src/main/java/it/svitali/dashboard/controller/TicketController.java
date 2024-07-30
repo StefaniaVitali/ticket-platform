@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import it.svitali.dashboard.model.Categoria;
+import it.svitali.dashboard.model.Nota;
 import it.svitali.dashboard.model.Ticket;
 import it.svitali.dashboard.repository.CategoriaReposity;
 import it.svitali.dashboard.repository.NotaRepository;
@@ -113,6 +114,20 @@ public class TicketController {
     	ticketRepository.deleteById(ticketId);
     	return "redirect:/dashboard";
     }
+    
+    @GetMapping("/{id}/note")
+	public String note(@PathVariable("id") Integer id, Model model) {
+		
+		Ticket ticket = ticketRepository.findById(id).get();
+		Nota nota = new Nota();
+		nota.setTicket(ticket);
+		
+		model.addAttribute("nota", nota);
+//		model.addAttribute("editMode", false);
+		
+		return "/note/create";
+	}
+    
     
 	
 

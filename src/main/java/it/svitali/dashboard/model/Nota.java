@@ -41,6 +41,11 @@ public class Nota {
 	@ManyToOne
 	@JoinColumn(name="user_id",nullable=false)
 	private User user;
+	
+	//COSTRUTTORE
+	public Nota(){
+		dataCreazione = LocalDateTime.now();
+	};
 
 	public Integer getId() {
 		return id;
