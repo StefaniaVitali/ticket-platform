@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import it.svitali.dashboard.model.Categoria;
 import it.svitali.dashboard.model.Ticket;
+import it.svitali.dashboard.repository.CategoriaReposity;
 import it.svitali.dashboard.repository.TicketRepository;
 import jakarta.validation.Valid;
 
@@ -24,6 +26,9 @@ public class TicketController {
 	
 	@Autowired
 	private TicketRepository ticketRepository;
+	
+	@Autowired
+	private CategoriaReposity categoriaRepository;
 
 	
 	@GetMapping
@@ -54,16 +59,19 @@ public class TicketController {
     @GetMapping("/create")
     public String create(Model model) {
     	
+    	
     	model.addAttribute("ticket", new Ticket());
+    	model.addAttribute("categorie", categoriaRepository.findAll());
     	
     	return "tickets/create";    
     	}
     
     @PostMapping("/create")
     public String store(@Valid @ModelAttribute("ticket") Ticket ticketForm, BindingResult bindingRisult, 
-    		Model model) {
+    		Model model) { 
     	
     	if(bindingRisult.hasErrors()) {
+    		model.addAttribute("categorie", categoriaRepository.findAll());
 			return "tickets/create";
 		}
     	
@@ -75,7 +83,9 @@ public class TicketController {
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable("id") Integer ticketId, Model model) {
     	
+    	List<Categoria> categorie= categoriaRepository.findAll();
     	model.addAttribute("ticket", ticketRepository.findById(ticketId).get());
+    	model.addAttribute("categorie", categorie);
     	return"tickets/edit";
     }
     
@@ -89,6 +99,13 @@ public class TicketController {
     	
     	ticketRepository.save(ticketForm);
     	
+    	return "redirect:/dashboard";
+    }
+    
+    @PostMapping("/delete/{id}")
+    public String delete(@PathVariable("id") Integer ticketId) {
+    	
+    	ticketRepository.deleteById(ticketId);
     	return "redirect:/dashboard";
     }
     

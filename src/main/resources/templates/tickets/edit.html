@@ -45,8 +45,8 @@
 			<div class="d-flex justify-content-center col-12">
 
 				<div class="form-create col-auto my-5 rounded">
-					<h1 class="text-center p-3" th:field="|Ticket: ${ticket.titolo}|"></h1>
-					
+					<h1 class="text-center p-3" th:text="|Ticket: ${ticket.titolo}|"></h1>
+					<!-- INIZIO FORM -->
 					<form class="py-3 px-4" id="ticket-form" th:object="${ticket}"
 						th:action="@{/dashboard/edit/{id}(id=${ticket.id})}" th:method="post">
 						<div class="mb-3">
@@ -63,18 +63,26 @@
 
 
 						</div>
-						<!--OPERATORE modificare lo status-->
-						<div class="mb-3">
-							<label for="status" class="form-label">Status</label>
-							<input class="form-control" type="text" id="status" th:field="*{ticketStatus}"
-								readonly>
-							</div>
+
 							<!--la data di creazione non deve cambiare-->
-							<div class="mb-3">
+						<div>
+							
+							<div class="mb-3 col d-flex justify-content-between">
+								<div>
+									
 								<label for="data-creazione" class="form-label">Data creazione</label>
 								<input class="form-control" type="text" id="data-creazione" th:field="*{data}"
 									readonly>
+								</div>
+								<div>
+									
+									<label for="categoria" class="form-label">Categoria</label>
+											<select class="form-control mb3" th:field="*{categoria}">
+											    <option th:each="op : ${categorie}" th:value="${op.id}" th:text="${op.nome}"></option>
+											</select>	
+								</div>
 								</div>							
+						</div>
 
 						
 						<div class="mb-3">
@@ -98,8 +106,20 @@
 						<!--fine select operatore -->
 						<!--NOTE? -->
 						<!--CATEGORIE?-->
+						<!--OPERATORE modificare lo status-->
+						<div class="mb-3">
+							<label for="status" class="form-label">Status</label>
+							<select class="form-select" th:field="*{ticketStatus}" id="rooms">
+							         <option th:each=" itemStatus : ${T(it.svitali.dashboard.model.TicketStatus).values()}"
+							                 th:value="${itemStatus}"
+							                 th:text="${itemStatus}">
+							         </option>
+							    </select>
+						
+							</div>
 						<button type="submit" class="btn btn-primary">MODIFICA</button>
-					</form>
+					</form>					
+					<!--FINE FORM -->
 				</div>
 			</div>
 		</div>

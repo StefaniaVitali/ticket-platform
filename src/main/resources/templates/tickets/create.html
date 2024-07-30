@@ -69,6 +69,18 @@
 									
 								</div>
 						</div>
+						
+						
+						<div>
+							
+							<label for="categoria" class="form-label">Categoria</label>
+							<select class="form-control mb3" th:field="*{categoria}">
+							    <option th:each="op : ${categorie}" th:value="${op.id}" th:text="${op.nome}"></option>
+							</select>	
+					
+						</div>
+						
+						
 						<div class="mb-3">
 							<!--OPERATORE DA SELEZIONARE select da implementare -->
 							<label for="operatore" class="form-label">Operatore*</label>
