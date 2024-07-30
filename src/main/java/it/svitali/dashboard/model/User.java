@@ -1,7 +1,10 @@
 package it.svitali.dashboard.model;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
@@ -21,6 +24,9 @@ public class User {
 	
 	@NotNull
 	private String surname;
+	
+	@OneToMany(mappedBy="user")
+	private List<Nota> note;	
 	
 	
 	//////

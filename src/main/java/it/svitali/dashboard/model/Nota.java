@@ -37,6 +37,10 @@ public class Nota {
 	@ManyToOne
 	@JoinColumn(name="ticket_id", nullable=false)
 	private Ticket ticket;
+	
+	@ManyToOne
+	@JoinColumn(name="user_id",nullable=false)
+	private User user;
 
 	public Integer getId() {
 		return id;
@@ -71,6 +75,16 @@ public class Nota {
 
 	public void setTicket(Ticket ticket) {
 		this.ticket = ticket;
+	}
+
+
+	public User getUser() {
+		return user;
+	}
+
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	

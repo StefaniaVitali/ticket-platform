@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import it.svitali.dashboard.model.Categoria;
 import it.svitali.dashboard.model.Ticket;
 import it.svitali.dashboard.repository.CategoriaReposity;
+import it.svitali.dashboard.repository.NotaRepository;
 import it.svitali.dashboard.repository.TicketRepository;
 import jakarta.validation.Valid;
 
@@ -29,6 +30,9 @@ public class TicketController {
 	
 	@Autowired
 	private CategoriaReposity categoriaRepository;
+	
+	@Autowired
+	private NotaRepository notaRepository;
 
 	
 	@GetMapping
@@ -51,6 +55,7 @@ public class TicketController {
     @GetMapping("/show/{id}")
     public String show(@PathVariable("id") Integer ticketId, Model model) {
     	
+		model.addAttribute("note", notaRepository.findAll());
     	model.addAttribute("ticket", ticketRepository.getReferenceById(ticketId));
     	
     	return "tickets/show";
