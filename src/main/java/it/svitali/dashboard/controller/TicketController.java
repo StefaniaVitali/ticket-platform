@@ -115,18 +115,18 @@ public class TicketController {
     	return "redirect:/dashboard";
     }
     
-    @GetMapping("/{id}/note")
-	public String note(@PathVariable("id") Integer id, Model model) {
-		
-		Ticket ticket = ticketRepository.findById(id).get();
-		Nota nota = new Nota();
-		nota.setTicket(ticket);
-		
-		model.addAttribute("nota", nota);
-//		model.addAttribute("editMode", false);
-		
-		return "/note/create";
-	}
+  @GetMapping("/show/{id}/note")
+  public String note(@PathVariable("id") Integer ticketId, Model model) {
+	  
+	   Nota nota = new Nota();
+	   Ticket ticket = ticketRepository.getReferenceById(ticketId);
+	   nota.setTicket(ticket);
+	   model.addAttribute("nota", nota);
+	   model.addAttribute("ticket",ticket);
+	  
+	  return"note/create";
+	  
+  }
     
     
 	

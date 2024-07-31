@@ -40,36 +40,41 @@
 		</nav>
 	</header>
 
-	<section class="ticket-creation-form mt-0">
-		<div class="container vw-100">
+	<section class="ticket-creation-form mt-0 vh-100">
+		<div class="container">
 			<div class="d-flex justify-content-center col-12">
 
 				<div class="form-create col-auto my-5 rounded">
-					<h1 class="text-center p-3">Aggiungi una nota al ticket</h1>
-					<form class="py-3 px-4" id="ticket-form" th:object="${ticket}" th:action="@{/dashboard/create}"
+					<h1 class="text-center p-3 h4" th:text="|Aggiungi nota al ticket: ${ticket.titolo}"></h1>
+					<form class="py-3 px-4" id="note-form" th:object="${nota}" th:action="@{/note/create}"
 						th:method="post">
 						<div class="mb-3">
+							<input type="hidden" th:field="*{ticket}" id="ticket">
 						</div>
 						<div class="mb-3">
-							<label for="descrizione" class="form-label">Descrizione*</label>
-							<textarea class="form-control" id="descrizione" name="descrizione" th:field="*{descrizione}"
+							<input type="hidden" th:field="*{}" id="ticket">
+						</div>
+						<div class="mb-3">
+							<label for="descrizione" class="form-label">Aggiungi nota*</label>
+							<textarea class="form-control" id="nota-testo" name="nota-testo" th:field="*{notaTesto}"
 								row="4" cols="50" th:errorClass="is-invalid"></textarea>
-								<div th:if="${#fields.hasErrors('descrizione')}" class="invalid-feedback">
+								<div th:if="${#fields.hasErrors('notaTesto')}" class="invalid-feedback">
 									<ul>
-										<li th:each="err: ${#fields.errors('descrizione')}" th:text="${err}"></li>
+										<li th:each="err: ${#fields.errors('notaTesto')}" th:text="${err}"></li>
 									</ul>
 									
 								</div>
 						</div>
 						
 						
+						
 						<div>
 							<!--OPERATORE DA SELEZIONARE select da implementare  quello attivo-->
 						</div>
-						<!--fine select operatore -->
+						<!--fine select user -->
 						<!--NOTE? -->
 						<!--CATEGORIE?-->
-						<button type="submit" class="btn btn-primary">CREA</button>
+						<button type="submit" class="btn btn-primary">AGGIUNGI NOTA</button>
 					</form>
 				</div>
 			</div>

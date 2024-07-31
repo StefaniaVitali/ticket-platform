@@ -23,10 +23,12 @@ public class NotaController {
 	
 
 //	@GetMapping("/create")
-//	public String create(Model model) {
-//		model.addAttribute("nota", new Nota());
-//		model.addAttribute("list",notaRepository.findById(null));
-//	}
+//     public String create(Model model) {
+//     model.addAttribute("nota", new Nota());
+//     model.addAttribute("list",notaRepository.findById(null));
+//     
+//     return: "/";
+//}
 	
 
 

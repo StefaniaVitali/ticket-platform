@@ -3,9 +3,11 @@ package it.svitali.dashboard.model;
 import java.util.List;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotNull;
 
@@ -30,6 +32,9 @@ public class User {
 	
 	@OneToMany(mappedBy="user")
 	private List<Nota> note;	
+	
+	@ManyToMany(fetch = FetchType.EAGER)
+	private List<Role>roles;
 	
 	
 	//////
@@ -73,6 +78,24 @@ public class User {
 	public void setSurname(String surname) {
 		this.surname = surname;
 	}
+
+	public List<Nota> getNote() {
+		return note;
+	}
+
+	public void setNote(List<Nota> note) {
+		this.note = note;
+	}
+
+	public List<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
+	}
+	
+	
  
 	//manytomany ruoli
 
