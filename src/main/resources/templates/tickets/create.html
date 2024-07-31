@@ -50,47 +50,48 @@
 						th:method="post">
 						<div class="mb-3">
 							<label for="titolo" class="form-label">Titolo*</label>
-							<input class="form-control" type="text" id="titolo" th:field="*{titolo}" th:errorClass="is-invalid">
-						<div th:if="${#fields.hasErrors('titolo')}" class="invalid-feedback">
-							<ul>
-								<li th:each="err: ${#fields.errors('titolo')}" th:text="${err}"></li>
-							</ul>
-							
-						</div>
+							<input class="form-control" type="text" id="titolo" th:field="*{titolo}"
+								th:errorClass="is-invalid">
+							<div th:if="${#fields.hasErrors('titolo')}" class="invalid-feedback">
+								<ul>
+									<li th:each="err: ${#fields.errors('titolo')}" th:text="${err}"></li>
+								</ul>
+
+							</div>
 						</div>
 						<div class="mb-3">
 							<label for="descrizione" class="form-label">Descrizione*</label>
 							<textarea class="form-control" id="descrizione" name="descrizione" th:field="*{descrizione}"
 								row="4" cols="50" th:errorClass="is-invalid"></textarea>
-								<div th:if="${#fields.hasErrors('descrizione')}" class="invalid-feedback">
-									<ul>
-										<li th:each="err: ${#fields.errors('descrizione')}" th:text="${err}"></li>
-									</ul>
-									
-								</div>
+							<div th:if="${#fields.hasErrors('descrizione')}" class="invalid-feedback">
+								<ul>
+									<li th:each="err: ${#fields.errors('descrizione')}" th:text="${err}"></li>
+								</ul>
+
+							</div>
 						</div>
-						
-						
+
+
 						<div>
-							
+
 							<label for="categoria" class="form-label">Categoria</label>
 							<select class="form-control mb3" th:field="*{categoria}">
-							    <option th:each="op : ${categorie}" th:value="${op.id}" th:text="${op.nome}"></option>
-							</select>	
-					
+								<option th:each="op : ${categorie}" th:value="${op.id}" th:text="${op.nome}"></option>
+							</select>
+
 						</div>
-						
-						
+
+
 						<div class="mb-3">
 							<!--OPERATORE DA SELEZIONARE select da implementare -->
 							<label for="operatore" class="form-label">Operatore*</label>
-							<select class="form-control">
-								<option value=""></option>
+							<select class="form-control" Th:field="*{user}">
+								<option th:each="us : ${utenti}" th:value="${us.id}" th:text="${us.username}"></option>
 							</select>
 						</div>
 						<!--fine select operatore -->
-						<!--NOTE? -->
-						<!--CATEGORIE?-->
+
+
 						<button type="submit" class="btn btn-primary">CREA</button>
 					</form>
 				</div>

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import it.svitali.dashboard.model.Categoria;
 import it.svitali.dashboard.model.Nota;
 import it.svitali.dashboard.model.Ticket;
+import it.svitali.dashboard.model.User;
 import it.svitali.dashboard.repository.CategoriaReposity;
 import it.svitali.dashboard.repository.NotaRepository;
 import it.svitali.dashboard.repository.TicketRepository;
@@ -83,6 +84,7 @@ public class TicketController {
     	
     	if(bindingRisult.hasErrors()) {
     		model.addAttribute("categorie", categoriaRepository.findAll());
+        	model.addAttribute("utenti", userRepository.findByRole("OPERATORE"));    		
 			return "tickets/create";
 		}
     	
@@ -97,6 +99,7 @@ public class TicketController {
     	List<Categoria> categorie= categoriaRepository.findAll();
     	model.addAttribute("ticket", ticketRepository.findById(ticketId).get());
     	model.addAttribute("categorie", categorie);
+    	model.addAttribute("utenti", userRepository.findByRole("OPERATORE"));    	
     	return"tickets/edit";
     }
     
@@ -105,6 +108,8 @@ public class TicketController {
     		Model model) {   
     	
     	if(bindingRisult.hasErrors()) {
+    		model.addAttribute("categorie", categoriaRepository.findAll());
+        	model.addAttribute("utenti", userRepository.findByRole("OPERATORE"));     		
 			return "tickets/edit";
 		}
     	
@@ -114,9 +119,15 @@ public class TicketController {
     }
     
     @PostMapping("/delete/{id}")
-    public String delete(@PathVariable("id") Integer ticketId) {
+    public String delete(@PathVariable("id") Integer ticketId) {  
+    	
+    	Ticket ticket = ticketRepository.findById(ticketId).get();
+    	for(Nota nota : ticket.getNote()) {
+    		notaRepository.delete(nota);
+    	}
     	
     	ticketRepository.deleteById(ticketId);
+    	
     	return "redirect:/dashboard";
     }
     
@@ -125,9 +136,11 @@ public class TicketController {
 	  
 	   Nota nota = new Nota();
 	   Ticket ticket = ticketRepository.getReferenceById(ticketId);
+	   List<User> user = userRepository.findAll();
 	   nota.setTicket(ticket);
 	   model.addAttribute("nota", nota);
 	   model.addAttribute("ticket",ticket);
+	   model.addAttribute("utenti", user);
 	  
 	  return"note/create";
 	  

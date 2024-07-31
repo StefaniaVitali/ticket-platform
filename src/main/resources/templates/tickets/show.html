@@ -58,7 +58,7 @@
 			<div class="d-flex justify-content-evenly align-items-start">
 
 				<div class="my-5 col-6">
-					<p>Operatore assegnato: </p>
+					<p th:text="|Operatore assegnato: ${ticket.user.username}|"></p>
 					<p th:text="|DATA CREAZIONE: ${#temporals.format(ticket.data, 'dd/MM/yyyy HH:mm')}|"></p>
 					<p th:text="|Descrizione: ${ticket.descrizione}|"></p>
                     <p Th:text="|Categoria: ${ticket.categoria.getNome()}|"></p>

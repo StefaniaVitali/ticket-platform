@@ -82,7 +82,7 @@
 						<th th:text="${ticket.titolo}"></th>
 						<th th:text="${ticket.descrizione}"></th>
 						<th th:text="${ticket.categoria.nome}"></th>
-						<th>Operatore</th>
+						<th th:text="${ticket.user.username}"></th>
 						<th th:text="${#temporals.format(ticket.data, 'dd/MM/yyyy HH:mm')}"></th>
 						<th>
 							<th:block th:switch="${ticket.ticketStatus}">
