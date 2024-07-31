@@ -55,7 +55,10 @@ public class Ticket {
 
 	@OneToMany(mappedBy="ticket")
 	private List<Nota> note;
-
+	
+	@ManyToOne
+	@JoinColumn(name="user_id", nullable=false)
+    private User user; 
 	
 	//COSTRUTTORE
 	public Ticket(){
@@ -121,6 +124,18 @@ public class Ticket {
 		this.note = note;
 	}
 
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+
+    
+
+	
 
 //	
 }

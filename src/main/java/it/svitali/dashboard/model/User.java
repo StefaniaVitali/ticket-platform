@@ -36,7 +36,11 @@ public class User {
 	@ManyToMany(fetch = FetchType.EAGER)
 	private List<Role>roles;
 	
+	@OneToMany(mappedBy="user")
+	private List<Ticket> tickets;
 	
+	private boolean active;
+		
 	//////
 
 	public Integer getId() {
@@ -93,6 +97,14 @@ public class User {
 
 	public void setRoles(List<Role> roles) {
 		this.roles = roles;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 	
 	

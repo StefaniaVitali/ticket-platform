@@ -20,6 +20,7 @@ import it.svitali.dashboard.model.Ticket;
 import it.svitali.dashboard.repository.CategoriaReposity;
 import it.svitali.dashboard.repository.NotaRepository;
 import it.svitali.dashboard.repository.TicketRepository;
+import it.svitali.dashboard.repository.UserRepository;
 import jakarta.validation.Valid;
 
 @Controller
@@ -34,6 +35,9 @@ public class TicketController {
 	
 	@Autowired
 	private NotaRepository notaRepository;
+	
+	@Autowired
+	private UserRepository userRepository;
 
 	
 	@GetMapping
@@ -68,6 +72,7 @@ public class TicketController {
     	
     	model.addAttribute("ticket", new Ticket());
     	model.addAttribute("categorie", categoriaRepository.findAll());
+    	model.addAttribute("utenti", userRepository.findByRole("OPERATORE"));
     	
     	return "tickets/create";    
     	}
