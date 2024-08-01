@@ -20,7 +20,7 @@ public class Categoria {
 	private Integer id;
 	
     @NotBlank(message ="Ogni categoria necessita di un nome")
-    @Column(name="nome_categoria")
+    @Column(name="nome_categoria", unique=true)
 	private String nome;
     
  	@OneToMany(mappedBy="categoria")

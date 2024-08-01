@@ -70,7 +70,8 @@ public class TicketController {
     @GetMapping("/show/{id}")
     public String show(@PathVariable("id") Integer ticketId, Model model ) {
     	
-    	model.addAttribute("note", notaRepository.findAll());
+    	Ticket t = ticketRepository.getReferenceById(ticketId);
+    	model.addAttribute("note", notaRepository.findByTicket(t));
     	model.addAttribute("ticket", ticketRepository.getReferenceById(ticketId));
     	
     	return "tickets/show";
