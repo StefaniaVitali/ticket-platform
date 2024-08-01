@@ -13,7 +13,7 @@ public interface UserRepository extends JpaRepository<User,Integer>{
 	
 	Optional<User> findByUsername(String username);
 	
-	@Query("SELECT u FROM User u JOIN u.roles r WHERE r.name = :role")
+	@Query("SELECT u FROM User u JOIN u.roles r WHERE r.name = :role AND u.active = true")
 	public List<User> findByRole(@Param("role") String role);
 
 
