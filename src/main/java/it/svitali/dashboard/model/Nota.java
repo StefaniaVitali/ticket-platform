@@ -29,10 +29,10 @@ public class Nota {
 	@Column(name="data_creazione")
 	private LocalDateTime dataCreazione;
 	
-	@NotBlank(message ="la descrizione non può essere vuota")
+	@NotBlank(message="la descrizione non può essere vuota")
 	@Size(max=255, message="la descrizione non può superare i 255 caratteri")
 	@Column(name="descrizione", nullable=false)
-	private String notaTesto;
+	private String descrizione;
 	
 	@ManyToOne
 	@JoinColumn(name="ticket_id", nullable=false)
@@ -66,12 +66,14 @@ public class Nota {
 		this.dataCreazione = dataCreazione;
 	}
 
-	public String getNotaTesto() {
-		return notaTesto;
+
+
+	public String getDescrizione() {
+		return descrizione;
 	}
 
-	public void setNotaTesto(String notaTesto) {
-		this.notaTesto = notaTesto;
+	public void setDescrizione(String descrizione) {
+		this.descrizione = descrizione;
 	}
 
 	public Ticket getTicket() {

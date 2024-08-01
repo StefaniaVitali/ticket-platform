@@ -58,10 +58,19 @@ public class TicketController {
 		return "/tickets/index";
 	}
 	
+//    @GetMapping("/show/{id}")
+//    public String show(@PathVariable("id") Integer ticketId, Model model) {
+//    	
+//		model.addAttribute("note", notaRepository.findAll());
+//    	model.addAttribute("ticket", ticketRepository.getReferenceById(ticketId));
+//    	
+//    	return "tickets/show";
+//    }
+    
     @GetMapping("/show/{id}")
-    public String show(@PathVariable("id") Integer ticketId, Model model) {
+    public String show(@PathVariable("id") Integer ticketId, Model model ) {
     	
-		model.addAttribute("note", notaRepository.findAll());
+    	model.addAttribute("note", notaRepository.findAll());
     	model.addAttribute("ticket", ticketRepository.getReferenceById(ticketId));
     	
     	return "tickets/show";
@@ -79,10 +88,10 @@ public class TicketController {
     	}
     
     @PostMapping("/create")
-    public String store(@Valid @ModelAttribute("ticket") Ticket ticketForm, BindingResult bindingRisult, 
+    public String store(@Valid @ModelAttribute("ticket") Ticket ticketForm, BindingResult bindingResult, 
     		Model model) { 
     	
-    	if(bindingRisult.hasErrors()) {
+    	if(bindingResult.hasErrors()) {
     		model.addAttribute("categorie", categoriaRepository.findAll());
         	model.addAttribute("utenti", userRepository.findByRole("OPERATORE"));    		
 			return "tickets/create";

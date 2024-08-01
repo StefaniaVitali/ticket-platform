@@ -58,28 +58,21 @@
 						 		<option th:each="us : ${utenti}" th:value="${us.id}" th:text="${us.username}"></option>
 						 	</select>
 						 </div>
-						<div class="mb-3">
-							<label for="descrizione" class="form-label">Aggiungi nota*</label>
-							<textarea class="form-control" id="nota-testo" name="nota-testo" th:field="*{notaTesto}"
-								row="4" cols="50" th:errorClass="is-invalid"></textarea>
-								<div th:if="${#fields.hasErrors('notaTesto')}" class="invalid-feedback">
-									<ul>
-										<li th:each="err: ${#fields.errors('notaTesto')}" th:text="${err}"></li>
-									</ul>
-									
-								</div>
-						</div>
-						
-						
-						
-						<div>
-							<!--OPERATORE DA SELEZIONARE select da implementare  quello attivo-->
-						</div>
-						<!--fine select user -->
-						<!--NOTE? -->
-						<!--CATEGORIE?-->
-						<button type="submit" class="btn btn-primary">AGGIUNGI NOTA</button>
+						 <div class="mb-3">
+						 	<label for="descrizione" class="form-label">Descrizione*</label>
+						 	<textarea class="form-control" id="descrizione" name="descrizione" th:field="*{descrizione}"
+						 		row="4" cols="50" th:errorClass="is-invalid"></textarea>
+						  	<div th:if="${#fields.hasErrors('descrizione')}" class="invalid-feedback">
+						 		<ul>
+						 			<li th:each="err: ${#fields.errors('descrizione')}" th:text="${err}"></li>
+						 		</ul>
+						 
+						 	</div>
+						 </div>
+				
+						<button type="submit" class="btn btn-primary"><i class="bi bi-plus-square"></i></button>
 					</form>
+					<a th:href="@{/dashboard/show/{id}(id=${ticket.id})}"><p class="text-center"><i class="bi bi-arrow-left-square-fill"></i> Torna al dettaglio del ticket</p></a>
 				</div>
 			</div>
 		</div>
