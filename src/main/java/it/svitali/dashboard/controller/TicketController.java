@@ -44,6 +44,8 @@ public class TicketController {
 	@GetMapping
 	public String index(Model model, @RequestParam(name="titolo", required = false) String titolo) {
 		
+	
+		
 		List<Ticket> tickets = new ArrayList<>();
 		
 		if(titolo == null || titolo.isBlank()) {
@@ -69,6 +71,8 @@ public class TicketController {
     
     @GetMapping("/show/{id}")
     public String show(@PathVariable("id") Integer ticketId, Model model ) {
+    	
+    	
     	
     	Ticket t = ticketRepository.getReferenceById(ticketId);
     	model.addAttribute("note", notaRepository.findByTicket(t));
