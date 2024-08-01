@@ -50,7 +50,15 @@ public class NotaController {
         return "redirect:/tickets/show/" + notaForm.getTicket().getId();
     }
     
-    
+    @PostMapping("/delete/{id}")
+    public String delete(@PathVariable("id") Integer notaId) {    	
+    	
+    	Ticket ticket = notaRepository.getReferenceById(notaId).getTicket();
+    	notaRepository.deleteById(notaId);
+    	
+    	return "redirect:/dashboard/show/" + ticket.getId() ; 
+    	
+    }
 
 }
 
