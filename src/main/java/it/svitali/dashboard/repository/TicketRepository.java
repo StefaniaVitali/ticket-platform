@@ -22,7 +22,7 @@ public interface TicketRepository extends JpaRepository<Ticket, Integer>{
 	
 	public List<Ticket> findByCategoria(Categoria categoria);
 	
-  // @Query("SELECT t FROM ticket t WHERE t.status = :status")
+
 	public List<Ticket> findByTicketStatus (TicketStatus status);
 	
 	@Query("SELECT t FROM Ticket t WHERE t.user.username = :username")

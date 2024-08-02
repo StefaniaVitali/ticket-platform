@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,13 +44,9 @@ public class TicketRestController {
 	        return ticketRepository.findByCategoriaNome(categoria);
 	    }
 	
-	   @GetMapping("/tickets/status")
-	   public List<Ticket> indexTicketByStatus(@RequestParam(name = "status", required = false) String status) {
-	        if (status == null) {
-	            return new ArrayList<>();
-	        }
-	        TicketStatus ticketStatus = TicketStatus.valueOf(status.toUpperCase());
-	        return ticketRepository.findByTicketStatus(ticketStatus);
+	   @GetMapping("/tickets/status/{status}")
+	   public List<Ticket> indexTicketByStatus(@PathVariable("status") TicketStatus ticketStatus){
+		   return ticketRepository.findByTicketStatus(ticketStatus);
 	    }
 	
 	
