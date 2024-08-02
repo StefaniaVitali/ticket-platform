@@ -43,7 +43,7 @@
 	<section class="table-section">
 		<div class="container">
 			<h1 class="text-center">La nuova dashboard test</h1>
-
+            <p th:text="|Welcome, ${#authentication.getPrincipal().getUsername()}|"></p>
 			<div class="mb-3 row-col-12">
 				<div class="d-flex justify-content-between align-items-center">
 
@@ -58,7 +58,10 @@
 							</button>
 						</form>
 					</div>
-					<div class="col-auto">
+					<div>
+						
+					</div>
+					<div class="col-auto" sec:authorize="hasAuthority('ADMIN')">
 						<a class="btn btn-primary ms-2" target="_blank" th:href="@{|/dashboard/create|}">CREA NUOVO <i
 								class="bi bi-plus-square"></i></a>
 					</div>

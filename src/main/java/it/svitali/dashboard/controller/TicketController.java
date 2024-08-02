@@ -1,9 +1,13 @@
 package it.svitali.dashboard.controller;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -44,15 +48,37 @@ public class TicketController {
 	@GetMapping
 	public String index(Model model, @RequestParam(name="titolo", required = false) String titolo) {
 		
-	
-		
 		List<Ticket> tickets = new ArrayList<>();
 		
-		if(titolo == null || titolo.isBlank()) {
-			tickets = ticketRepository.findAll();
-		} else {
-			tickets = ticketRepository.findByTitolo(titolo);
-		}		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String utenteCorrente = authentication.getName();
+		
+		boolean isAdmin = false;
+		Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+        for (GrantedAuthority authority : authorities) {
+            if ("ADMIN".equals(authority.getAuthority())) {
+                isAdmin = true;
+        		if(titolo == null || titolo.isBlank()) {
+        			tickets = ticketRepository.findAll();
+        		} else {
+        			tickets = ticketRepository.findByTitolo(titolo);
+        		}	
+                break;
+            } else {
+            	tickets = ticketRepository.findByUsername(utenteCorrente);
+            }
+            
+            
+            
+        }
+        
+        
+        
+		
+		
+
+		
+	
 		
 		
 		model.addAttribute("list", tickets);
@@ -60,15 +86,6 @@ public class TicketController {
 		return "/tickets/index";
 	}
 	
-//    @GetMapping("/show/{id}")
-//    public String show(@PathVariable("id") Integer ticketId, Model model) {
-//    	
-//		model.addAttribute("note", notaRepository.findAll());
-//    	model.addAttribute("ticket", ticketRepository.getReferenceById(ticketId));
-//    	
-//    	return "tickets/show";
-//    }
-    
     @GetMapping("/show/{id}")
     public String show(@PathVariable("id") Integer ticketId, Model model ) {
     	
@@ -77,6 +94,7 @@ public class TicketController {
     	Ticket t = ticketRepository.getReferenceById(ticketId);
     	model.addAttribute("note", notaRepository.findByTicket(t));
     	model.addAttribute("ticket", ticketRepository.getReferenceById(ticketId));
+    	
     	
     	return "tickets/show";
     }
