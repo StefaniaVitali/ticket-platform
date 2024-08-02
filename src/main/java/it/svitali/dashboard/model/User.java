@@ -2,6 +2,8 @@ package it.svitali.dashboard.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -42,12 +44,15 @@ public class User {
 	
 	
 	@OneToMany(mappedBy="user")
+	@JsonIgnore
 	private List<Nota> note;	
 	
 	@ManyToMany(fetch = FetchType.EAGER)
+	@JsonIgnore
 	private List<Role>roles;
 	
 	@OneToMany(mappedBy="user")
+	@JsonIgnore
 	private List<Ticket> tickets;
 	
 	private boolean active;

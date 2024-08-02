@@ -5,6 +5,10 @@ import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -50,14 +54,17 @@ public class Ticket {
 	
 	@ManyToOne
 	@JoinColumn(name="categoria_id", nullable=false)
+	@JsonBackReference
     private Categoria categoria;
 	
 
 	@OneToMany(mappedBy="ticket")
+	@JsonManagedReference
 	private List<Nota> note;
 	
 	@ManyToOne
 	@JoinColumn(name="user_id", nullable=false)
+	@JsonBackReference
     private User user; 
 	
 	//COSTRUTTORE
