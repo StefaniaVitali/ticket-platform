@@ -143,18 +143,28 @@ public class TicketController {
     	return "redirect:/dashboard";
     }
     
+//    @PostMapping("/delete/{id}")
+//    public String delete(@PathVariable("id") Integer ticketId) {  
+//    	
+////    	Ticket ticket = ticketRepository.findById(ticketId).get();
+////    	for(Nota nota : ticket.getNote()) {
+////    		notaRepository.delete(nota);
+////    	}
+//    	
+//    	ticketRepository.deleteById(ticketId);
+//    	
+//    	return "redirect:/dashboard";
+//    }
+
     @PostMapping("/delete/{id}")
-    public String delete(@PathVariable("id") Integer ticketId) {  
+    public String delete(@PathVariable("id") Integer ticketId) {
     	
-    	Ticket ticket = ticketRepository.findById(ticketId).get();
-    	for(Nota nota : ticket.getNote()) {
-    		notaRepository.delete(nota);
-    	}
-    	
+   // 	Ticket ticket = ticketRepository.findById(ticketId).get();
     	ticketRepository.deleteById(ticketId);
     	
     	return "redirect:/dashboard";
     }
+    
     
   @GetMapping("/show/{id}/note")
   public String note(@PathVariable("id") Integer ticketId, Model model) {

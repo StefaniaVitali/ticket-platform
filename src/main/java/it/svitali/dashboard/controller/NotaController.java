@@ -47,7 +47,7 @@ public class NotaController {
         }
 
         notaRepository.save(notaForm);
-        return "redirect:/tickets/show/" + notaForm.getTicket().getId();
+        return "redirect:/dashboard/show/" + notaForm.getTicket().getId();
     }
     
     @PostMapping("/delete/{id}")
