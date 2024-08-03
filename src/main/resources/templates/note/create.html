@@ -28,12 +28,14 @@
 							<input type="hidden" th:field="*{ticket}" id="ticket">
 						</div>
                          <!-- IMPLEMENTARE CHE L'UTENTE CHE LOGGATO LA CREA' -->
-						 <div class="mb-3">
+					      <div class="mb-3">
 						 	<label for="operatore" class="form-label">Operatore*</label>
-						 	<select class="form-control" Th:field="*{user}">
+						 	<select class="form-control" th:field="*{user}">
 						 		<option th:each="us : ${utenti}" th:value="${us.id}" th:text="${us.username}"></option>
 						 	</select>
 						 </div>
+						 
+
 						 <div class="mb-3">
 						 	<label for="descrizione" class="form-label">Descrizione*</label>
 						 	<textarea class="form-control" id="descrizione" name="descrizione" th:field="*{descrizione}"

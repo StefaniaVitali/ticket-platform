@@ -3,6 +3,8 @@ package it.svitali.dashboard.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -38,11 +40,14 @@ public class NotaController {
     public String create(@Valid @ModelAttribute("nota") Nota notaForm,
                          BindingResult bindingResult,
                          Model model) {
+		
+		
         if (bindingResult.hasErrors()) {
             Ticket ticket = ticketRepository.getReferenceById(notaForm.getTicket().getId());
             List<User> users = userRepository.findAll();
             model.addAttribute("ticket", ticket);
             model.addAttribute("utenti", users);
+   //         model.addAttribute("utenteCorrente", utenteCorrente);
             return "note/create";
         }
 
