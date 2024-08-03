@@ -70,17 +70,10 @@ public class TicketController {
             
             
             
-        }
+        }    
         
         
-        
-		
-		
 
-		
-	
-		
-		
 		model.addAttribute("list", tickets);
 		
 		return "/tickets/index";

@@ -32,7 +32,12 @@
 							<a class="nav-link" href="#">Servizi</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#">Contatti</a>
+							<div class="d-flex flex-column">								
+							<a class="nav-link mb-1" href="#"><p class="text-end mb-1" th:text="|Welcome, ${#authentication.getPrincipal().getUsername()}|"></p></a>
+							<p class="text-white-50 fs-3 text-center">
+								<i class="bi bi-person-circle fa-10x m-0 p-0"></i>									
+							</p>
+
 						</li>
 					</ul>
 				</div>
@@ -43,7 +48,6 @@
 	<section class="table-section">
 		<div class="container">
 			<h1 class="text-center">La nuova dashboard test</h1>
-            <p th:text="|Welcome, ${#authentication.getPrincipal().getUsername()}|"></p>
 			<div class="mb-3 row-col-12">
 				<div class="d-flex justify-content-between align-items-center">
 

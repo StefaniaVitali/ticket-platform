@@ -25,29 +25,26 @@ public class TicketRestController {
 
 	@Autowired
 	private TicketRepository ticketRepository;
-	
+
 	@Autowired
 	private CategoriaReposity categoriaRepository;
 
-	@GetMapping ("/tickets")
-	public List<Ticket> indexTicket() {		
-		   List<Ticket> tickets = new ArrayList<>();		   
-		
-		     return   tickets = ticketRepository.findAll();	    
-		   
+	@GetMapping("/tickets")
+	public List<Ticket> indexTicket() {
+		List<Ticket> tickets = new ArrayList<>();
 
-	}	
-	
-	
-	   @GetMapping("/tickets/categoria")
-	    public List<Ticket> indexTicketByCategory(@RequestParam(name = "name") String categoria) {
-	        return ticketRepository.findByCategoriaNome(categoria);
-	    }
-	
-	   @GetMapping("/tickets/status/{status}")
-	   public List<Ticket> indexTicketByStatus(@PathVariable("status") TicketStatus ticketStatus){
-		   return ticketRepository.findByTicketStatus(ticketStatus);
-	    }
-	
-	
+		return tickets = ticketRepository.findAll();
+
+	}
+
+	@GetMapping("/tickets/categoria")
+	public List<Ticket> indexTicketByCategory(@RequestParam(name = "name") String categoria) {
+		return ticketRepository.findByCategoriaNome(categoria);
+	}
+
+	@GetMapping("/tickets/status/{status}")
+	public List<Ticket> indexTicketByStatus(@PathVariable("status") TicketStatus ticketStatus) {
+		return ticketRepository.findByTicketStatus(ticketStatus);
+	}
+
 }
