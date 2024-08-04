@@ -59,7 +59,7 @@ public class Ticket {
     private Categoria categoria;
 	
 
-	@OneToMany(mappedBy="ticket")
+	@OneToMany(mappedBy="ticket",cascade = CascadeType.ALL)
 	@JsonManagedReference
 	private List<Nota> note;
 	

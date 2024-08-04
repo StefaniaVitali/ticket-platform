@@ -18,9 +18,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	@Query("SELECT u FROM User u JOIN u.roles r WHERE r.name = :role AND u.active = true")
 	public List<User> findByRole(@Param("role") String role);
 
-	@Modifying
-	@Transactional
-	@Query("UPDATE User u SET u.active = :active WHERE u.username = :username")
-	void updateUserStatus(@Param("active") boolean active, @Param("username") String username);
+
 
 }
