@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import it.svitali.dashboard.model.Ticket;
 import it.svitali.dashboard.model.TicketStatus;
 import it.svitali.dashboard.model.User;
+import it.svitali.dashboard.repository.TicketRepository;
 import it.svitali.dashboard.repository.UserRepository;
 import jakarta.validation.Valid;
 
@@ -28,6 +29,8 @@ public class UserController {
 	
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired TicketRepository ticketRepository;
 	
 	@GetMapping("/edit/{id}")
 	public String edit(@PathVariable("id") Integer userId, Model model) {
@@ -51,7 +54,19 @@ public class UserController {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String utenteCorrente = authentication.getName();
 		Optional<User> user = userRepository.findByUsername(utenteCorrente);	
-
+		
+		 List<Ticket> userTickets = ticketRepository.findByUser(userForm);
+	        
+	        boolean isCompleted = false;
+	        
+	        for(Ticket t : userTickets) {
+	        	
+	        	if(t.getTicketStatus() != TicketStatus.COMPLETED) {
+	        		
+	        		return "users/show";
+	        	}
+	        	
+	        }
 
 		userRepository.save(userForm);    	
     	
