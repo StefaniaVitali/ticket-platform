@@ -3,6 +3,7 @@ package it.svitali.dashboard.controller;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -52,6 +53,7 @@ public class TicketController {
 		
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String utenteCorrente = authentication.getName();
+		Optional<User> user = userRepository.findByUsername(utenteCorrente);
 		
 		boolean isAdmin = false;
 		Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
@@ -73,7 +75,7 @@ public class TicketController {
         }    
         
         
-
+        model.addAttribute("user", user.get());
 		model.addAttribute("list", tickets);
 		
 		return "/tickets/index";
