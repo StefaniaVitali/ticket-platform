@@ -57,16 +57,22 @@ public class UserController {
 		
 		 List<Ticket> userTickets = ticketRepository.findByUser(userForm);
 	        
-	        boolean isCompleted = false;
+       
 	        
-	        for(Ticket t : userTickets) {
+	        if(!userTickets.isEmpty()) {
+	        	 
 	        	
-	        	if(t.getTicketStatus() != TicketStatus.COMPLETED) {
+	        	for(Ticket t : userTickets) {
 	        		
-	        		return "users/show";
+	        		if(t.getTicketStatus() != TicketStatus.COMPLETED) {
+	        			
+	        			return "users/show";
+	        			
+	        		}
+	        		
 	        	}
-	        	
 	        }
+	        
 
 		userRepository.save(userForm);    	
     	

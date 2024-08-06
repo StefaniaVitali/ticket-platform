@@ -82,7 +82,7 @@
 							class="bi bi-search"></i></a>
 					<a class="btn btn-primary m-1" target="_blank" th:href="@{|/dashboard/edit/${ticket.id}|}"><i
 							class="bi bi-pencil"></i></a>
-					<form th:action="@{/dashboard/delete/{id}(id=${ticket.id})}" th:method="post">
+					<form th:action="@{/dashboard/delete/{id}(id=${ticket.id})}" th:method="post" sec:authorize="hasAuthority('ADMIN')">
 						<button class="btn btn-danger m-1" type="submit" id="submitButton"
 							th:data-confirm-delete="|Sei sicuro di voler eliminare questo ticket? Una volta eliminato non sarà più possibile recuperarlo.|"
 							onclick="if(!confirm(this.getAttribute('data-confirm-delete'))) return false">
