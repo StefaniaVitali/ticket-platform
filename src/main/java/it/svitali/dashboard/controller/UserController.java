@@ -59,14 +59,14 @@ public class UserController {
 	        
        
 	        
-	        if(!userTickets.isEmpty()) {
-	        	 
+	        if(!userTickets.isEmpty()) {	        	 
 	        	
 	        	for(Ticket t : userTickets) {
 	        		
 	        		if(t.getTicketStatus() != TicketStatus.COMPLETED) {
 	        			
 	        			return "users/show";
+	        			
 	        			
 	        		}
 	        		

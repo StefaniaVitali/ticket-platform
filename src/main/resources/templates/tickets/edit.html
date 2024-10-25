@@ -62,7 +62,7 @@
 						</div>
 						<div class="mb-3">
 							<label for="operatore" class="form-label">Operatore*</label>
-							<select class="form-control" Th:field="*{user}">
+							<select class="form-control" Th:field="*{user}" readonly>
 								<option th:each="us : ${utenti}" th:value="${us.id}" th:text="${us.username}"></option>
 							</select>
 						</div>

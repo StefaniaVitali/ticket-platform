@@ -153,7 +153,7 @@ public class TicketController {
    		notaRepository.delete(nota);
     	}
     	
-    	ticketRepository.delete(ticket);
+    	ticketRepository.deleteById(ticketId);
     	
     	return "redirect:/dashboard";
     }

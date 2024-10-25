@@ -33,11 +33,11 @@
 			</div>
 			<div class="d-flex justify-content-evenly align-items-start">
 
-				<div class="my-5 col-6">
-					<p th:text="|Operatore assegnato: ${ticket.user.username}|"></p>
-					<p th:text="|DATA CREAZIONE: ${#temporals.format(ticket.data, 'dd/MM/yyyy HH:mm')}|"></p>
-					<p th:text="|Descrizione: ${ticket.descrizione}|"></p>
-                    <p Th:text="|Categoria: ${ticket.categoria.getNome()}|"></p>
+				<div class="my-5 col-6 text-align-center">
+					<p class="fs-4">Operatore assegnato: <span th:text="${ticket.user.username}"></span></p>
+					<p class="fs-4">Data creazione: <span th:text="|${#temporals.format(ticket.data, 'dd/MM/yyyy HH:mm')}|"></span></p>	
+					<p class="fs-4">Descrizione: <span class="fs-6" th:text="${ticket.descrizione}"></span></p>	
+					<p class="fs-4">Categoria: <span th:text="${ticket.categoria.getNome()}"></span></p>					
 				</div>				
 
 			<div>
@@ -47,7 +47,7 @@
 					<a class="btn btn-primary m-1" target="_blank" th:href="@{|/dashboard/edit/${ticket.id}|}"><i
 							class="bi bi-pencil"></i></a>
 					<form th:action="@{/dashboard/delete/{id}(id=${ticket.id})}" th:method="post">
-						<button class="btn btn-danger m-1" type="submit" id="submitButton"
+						<button class="btn btn-danger m-1" type="submit" id="submitButton" sec:authorize="hasAuthority('ADMIN')"
 							th:data-confirm-delete="|Sei sicuro di voler eliminare questo ticket? Una volta eliminato non sarà più possibile recuperarlo.|"
 							onclick="if(!confirm(this.getAttribute('data-confirm-delete'))) return false"><i
 								class="bi bi-trash"></i></button>
